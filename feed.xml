@@ -5,8 +5,8 @@
     <description>Information Security</description>
     <link>http://www.ratiosec.com/</link>
     <atom:link href="http://www.ratiosec.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 10 Feb 2016 19:49:56 +0000</pubDate>
-    <lastBuildDate>Wed, 10 Feb 2016 19:49:56 +0000</lastBuildDate>
+    <pubDate>Wed, 10 Feb 2016 21:12:24 +0000</pubDate>
+    <lastBuildDate>Wed, 10 Feb 2016 21:12:24 +0000</lastBuildDate>
     <generator>Jekyll v3.1.1</generator>
     
       <item>
@@ -66,11 +66,9 @@
 
 &lt;h1 id=&quot;proof-of-concept&quot;&gt;Proof Of Concept&lt;/h1&gt;
 
-&lt;p&gt;The following HTML page exploits the cross-site request forgery vulnerability which creates the WordPress code, database Dump, and install scripts (respectively &lt;code&gt;/wp-snapshots/ratiosec_ratiosec_archive.zip&lt;/code&gt;, &lt;code&gt;/wp-snapshots/ratiosec_ratiosec_database.sql&lt;/code&gt;, and &lt;code&gt;/wp-snapshots/ratiosec_ratiosec_installer.php&lt;/code&gt;) if visited by a logged-in administrator.&lt;/p&gt;
+&lt;p&gt;The proof of concept code, if visited by a logged-in administratative user, raise two requests (&lt;code&gt;/wp-admin/admin.php?page=duplicator&amp;amp;tab=new2&lt;/code&gt; and &lt;code&gt;/wp-admin/admin-ajax.php?action=duplicator_package_build&lt;/code&gt;) which create the WordPress source code, database, and install scripts backup in the paths &lt;code&gt;/wp-snapshots/ratiosec_ratiosec_archive.zip&lt;/code&gt;, &lt;code&gt;/wp-snapshots/ratiosec_ratiosec_database.sql&lt;/code&gt;, and &lt;code&gt;/wp-snapshots/ratiosec_ratiosec_installer.php&lt;/code&gt;. Once created, the archives can be downloaded by the attacker with no authentication.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/posts/0003-001.png&quot; alt=&quot;PoC Screenshot&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Once the CSRF requests generate the files in &lt;code&gt;/wp-snapshots/&lt;/code&gt;, these can be easily downloaded by the attacker with no authentication. Find here the proof of concept code.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
