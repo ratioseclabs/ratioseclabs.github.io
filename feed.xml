@@ -5,9 +5,9 @@
     <description>Information Security</description>
     <link>http://www.ratiosec.com/</link>
     <atom:link href="http://www.ratiosec.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 24 Feb 2016 20:53:05 +0000</pubDate>
-    <lastBuildDate>Wed, 24 Feb 2016 20:53:05 +0000</lastBuildDate>
-    <generator>Jekyll v3.1.1</generator>
+    <pubDate>Wed, 27 Mar 2019 19:33:03 +0000</pubDate>
+    <lastBuildDate>Wed, 27 Mar 2019 19:33:03 +0000</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
     
       <item>
         <title>JSN Poweradmin Joomla! Extension Remote Command Execution Via CSRF and XSS vulnerabilities</title>
@@ -70,7 +70,7 @@
 
 &lt;h1 id=&quot;proof-of-concept&quot;&gt;Proof Of Concept&lt;/h1&gt;
 
-&lt;p&gt;1) The following HTML page exploits the cross-site request forgery vulnerability and uploads a malicious PHP script &lt;code&gt;system($_GET[&#39;cmd&#39;]);&lt;/code&gt; as &lt;code&gt;/tmp/bd.phtml&lt;/code&gt; if visited by a logged-in administrator.&lt;/p&gt;
+&lt;p&gt;1) The following HTML page exploits the cross-site request forgery vulnerability and uploads a malicious PHP script &lt;code&gt;system($_GET['cmd']);&lt;/code&gt; as &lt;code&gt;/tmp/bd.phtml&lt;/code&gt; if visited by a logged-in administrator.&lt;/p&gt;
 
 &lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
