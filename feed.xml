@@ -5,9 +5,139 @@
     <description>Information Security</description>
     <link>http://www.ratiosec.com/</link>
     <atom:link href="http://www.ratiosec.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 27 Mar 2019 19:33:03 +0000</pubDate>
-    <lastBuildDate>Wed, 27 Mar 2019 19:33:03 +0000</lastBuildDate>
+    <pubDate>Thu, 28 Mar 2019 11:29:04 +0000</pubDate>
+    <lastBuildDate>Thu, 28 Mar 2019 11:29:04 +0000</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>Horde Groupware Webmail Authenticated Arbitrary File Injection to RCE</title>
+        <description>&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Advisory ID&lt;/td&gt;
+      &lt;td&gt;RS-2019-001&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Product&lt;/td&gt;
+      &lt;td&gt;Horde Groupware Webmail&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Vendor&lt;/td&gt;
+      &lt;td&gt;Horde LLC&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Tested Versions&lt;/td&gt;
+      &lt;td&gt;5.2.22 and 5.2.17&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Other Vulnerable Versions&lt;/td&gt;
+      &lt;td&gt;Prior versions may also be affected&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Vendor Notification&lt;/td&gt;
+      &lt;td&gt;December 2018&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Advisory Publication&lt;/td&gt;
+      &lt;td&gt;24rd March, 2019&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CVE Reference&lt;/td&gt;
+      &lt;td&gt;CVE-2019-9858&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Risk Level&lt;/td&gt;
+      &lt;td&gt;High&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CVSSv3 Base Score&lt;/td&gt;
+      &lt;td&gt;CVSS:3.0/AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h1 id=&quot;advisory&quot;&gt;Advisory&lt;/h1&gt;
+
+&lt;p&gt;RatioSec Research has discovered an arbitrary file write vulnerability that leads to remote code execution in Horde Groupware Webmail.&lt;/p&gt;
+
+&lt;p&gt;This can be exploited by an authenticated, unprivileged user to create a malicious PHP file under the Horde web root and gain arbitrary code execution on the server.&lt;/p&gt;
+
+&lt;p&gt;The vulnerability is located in the core Horde source code and has been proven exploitable with the installed default Turba address book component.&lt;/p&gt;
+
+&lt;p&gt;The exploit has been proven working with the stable release Horde Groupware Webmail 5.2.22 and 5.2.17. Other versions may also be affected.&lt;/p&gt;
+
+&lt;h1 id=&quot;proof-of-concept&quot;&gt;Proof Of Concept&lt;/h1&gt;
+
+&lt;p&gt;The Horde file &lt;code&gt;Horde/Form/Type.php&lt;/code&gt; contains the vulnerable class that handles the image upload in forms.&lt;/p&gt;
+
+&lt;p&gt;When the &lt;code&gt;Horde_Form_Type_image&lt;/code&gt; method &lt;code&gt;onSubmit()&lt;/code&gt; is called on uploads it invokes the functions &lt;code&gt;getImage()&lt;/code&gt; and &lt;code&gt;_getUpload()&lt;/code&gt;, which uses unsanitized user input as path to save the image.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image1.png&quot; alt=&quot;Function uses unsanitized input to rename the uploaded file &quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The unsanitized post parameter &lt;code&gt;object[photo][img][file]&lt;/code&gt; is saved in the &lt;code&gt;$upload['img']['file']&lt;/code&gt; php variable, allowing an attacker to manipulate the &lt;code&gt;$tmp_file&lt;/code&gt; passed  to &lt;code&gt;move_uploaded_file()&lt;/code&gt; to save the uploaded file.&lt;/p&gt;
+
+&lt;p&gt;Set the parameter to e.g. &lt;code&gt;../usr/share/horde/static/bd.php&lt;/code&gt; to write a php backdoor inside the web root. the &lt;code&gt;static/&lt;/code&gt; destination folder is a good candidate to drop the backdoor because is always writable in horde installations.&lt;/p&gt;
+
+&lt;p&gt;The unsanitized POST parameter went probably unnoticed because it’s never submitted by the forms which default to securely use a random path.&lt;/p&gt;
+
+&lt;h3 id=&quot;steps-to-reproduce&quot;&gt;Steps to reproduce&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Log into the Horde Groupware Webmail as normal user.&lt;/li&gt;
+  &lt;li&gt;Access the &lt;code&gt;New Contact&lt;/code&gt; view via &lt;code&gt;Address Book&lt;/code&gt; in the menu.&lt;/li&gt;
+  &lt;li&gt;Create a PHP backdoor file on your disk.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Fill the mandatory fields submitting the PHP backdoor in the &lt;code&gt;Photo&lt;/code&gt; file field. The file name is irrelevant.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image2.png&quot; alt=&quot;Step 4&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Click the Add button and intercept the outgoing HTTP request using Burp Suite. You should see the POST data including the uploaded PHP backdoor.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image3.png&quot; alt=&quot;Step 5&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Add the new POST field &lt;code&gt;object[photo][img][file]&lt;/code&gt; with the path to traverse the temporary folder and save the PHP backdoor under under the &lt;code&gt;static/&lt;/code&gt; folder. Two path traversals have been found working in different installations:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;./usr/share/horde/static/bd.php&lt;/code&gt;, working with Horde installed with &lt;code&gt;apt-get&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;./var/www/html/horde/static/bd.php&lt;/code&gt;, working with Horde manually installed with PEAR&lt;/li&gt;
+    &lt;/ul&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image4.png&quot; alt=&quot;Step 6&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Forward the request to the target server.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Use the uploaded PHP file to execute arbitrary commands.&lt;/p&gt;
+
+    &lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image5.png&quot; alt=&quot;Step 8&quot; /&gt;&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;metasploit-module&quot;&gt;Metasploit module&lt;/h3&gt;
+
+&lt;p&gt;Install the module under &lt;code&gt;~/.msf4/modules/exploits/unix/webapp/horde_turba_file_upload.rb&lt;/code&gt;. The module automatically exploits the Horde across different configurations, both if manually installed with PEAR or with apt-get.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image6.jpg&quot; alt=&quot;Metasploit&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;solution&quot;&gt;Solution&lt;/h1&gt;
+
+&lt;p&gt;The vulnerability has been fixed the 4th January in the git &lt;a href=&quot;https://github.com/horde/Form/commit/c916ba979ad1613d76a9407dd0b67968a9594c0e#diff-a09a0502cb30c4dc17838ad8b365f5e9&quot;&gt;repository&lt;/a&gt;. Update to the last version.&lt;/p&gt;
+
+&lt;h1 id=&quot;timeline&quot;&gt;Timeline&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Disclosure to &lt;a href=&quot;https://ssd-disclosure.com/&quot;&gt;SSD&lt;/a&gt;: 26th July, 2018&lt;/li&gt;
+  &lt;li&gt;Fixed in GIT: 4th February, 2018&lt;/li&gt;
+  &lt;li&gt;Advisory Publication by &lt;a href=&quot;https://ssd-disclosure.com/index.php/archives/3814&quot;&gt;SSD&lt;/a&gt;: 24rd March, 2018&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        <pubDate>Sun, 24 Mar 2019 21:54:52 +0000</pubDate>
+        <link>http://www.ratiosec.com/2019/horde-groupware-webmail-authenticated-arbitrary-file-injection-to-rce/</link>
+        <guid isPermaLink="true">http://www.ratiosec.com/2019/horde-groupware-webmail-authenticated-arbitrary-file-injection-to-rce/</guid>
+        
+        
+        <category>research</category>
+        
+      </item>
     
       <item>
         <title>JSN Poweradmin Joomla! Extension Remote Command Execution Via CSRF and XSS vulnerabilities</title>
