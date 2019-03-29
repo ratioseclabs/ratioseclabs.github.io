@@ -5,8 +5,8 @@
     <description>Information Security</description>
     <link>http://www.ratiosec.com/</link>
     <atom:link href="http://www.ratiosec.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 29 Mar 2019 11:01:50 +0000</pubDate>
-    <lastBuildDate>Fri, 29 Mar 2019 11:01:50 +0000</lastBuildDate>
+    <pubDate>Fri, 29 Mar 2019 16:27:25 +0000</pubDate>
+    <lastBuildDate>Fri, 29 Mar 2019 16:27:25 +0000</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -114,7 +114,7 @@
 
 &lt;h3 id=&quot;metasploit-module&quot;&gt;Metasploit module&lt;/h3&gt;
 
-&lt;p&gt;Install the module under &lt;code&gt;~/.msf4/modules/exploits/unix/webapp/horde_turba_file_upload.rb&lt;/code&gt;. The module automatically exploits the Horde across different configurations, both if manually installed with PEAR or with apt-get.&lt;/p&gt;
+&lt;p&gt;Install the module under &lt;code&gt;~/.msf4/modules/exploits/multi/http/horde_form_file_upload.rb&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/posts/RS-2019-001/image6.jpg&quot; alt=&quot;Metasploit&quot; /&gt;&lt;/p&gt;
 
