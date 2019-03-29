@@ -5,8 +5,8 @@
     <description>Information Security</description>
     <link>http://www.ratiosec.com/</link>
     <atom:link href="http://www.ratiosec.com/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 28 Mar 2019 11:29:04 +0000</pubDate>
-    <lastBuildDate>Thu, 28 Mar 2019 11:29:04 +0000</lastBuildDate>
+    <pubDate>Fri, 29 Mar 2019 11:01:50 +0000</pubDate>
+    <lastBuildDate>Fri, 29 Mar 2019 11:01:50 +0000</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -27,7 +27,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Tested Versions&lt;/td&gt;
-      &lt;td&gt;5.2.22 and 5.2.17&lt;/td&gt;
+      &lt;td&gt;5.2.22 and 5.2.17 with Horde Form &amp;lt; 2.0.19&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Other Vulnerable Versions&lt;/td&gt;
@@ -64,7 +64,7 @@
 
 &lt;p&gt;The vulnerability is located in the core Horde source code and has been proven exploitable with the installed default Turba address book component.&lt;/p&gt;
 
-&lt;p&gt;The exploit has been proven working with the stable release Horde Groupware Webmail 5.2.22 and 5.2.17. Other versions may also be affected.&lt;/p&gt;
+&lt;p&gt;The exploit has been proven working with the stable release Horde Groupware Webmail 5.2.22 and 5.2.17 with Horde Form subcomponent &amp;lt; 2.0.19. Other versions may also be affected.&lt;/p&gt;
 
 &lt;h1 id=&quot;proof-of-concept&quot;&gt;Proof Of Concept&lt;/h1&gt;
 
@@ -120,14 +120,15 @@
 
 &lt;h1 id=&quot;solution&quot;&gt;Solution&lt;/h1&gt;
 
-&lt;p&gt;The vulnerability has been fixed the 4th January in the git &lt;a href=&quot;https://github.com/horde/Form/commit/c916ba979ad1613d76a9407dd0b67968a9594c0e#diff-a09a0502cb30c4dc17838ad8b365f5e9&quot;&gt;repository&lt;/a&gt;. Update to the last version.&lt;/p&gt;
+&lt;p&gt;Update Horde Form subcomponent to the version 2.0.19 or later.&lt;/p&gt;
 
 &lt;h1 id=&quot;timeline&quot;&gt;Timeline&lt;/h1&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Disclosure to &lt;a href=&quot;https://ssd-disclosure.com/&quot;&gt;SSD&lt;/a&gt;: 26th July, 2018&lt;/li&gt;
-  &lt;li&gt;Fixed in GIT: 4th February, 2018&lt;/li&gt;
-  &lt;li&gt;Advisory Publication by &lt;a href=&quot;https://ssd-disclosure.com/index.php/archives/3814&quot;&gt;SSD&lt;/a&gt;: 24rd March, 2018&lt;/li&gt;
+  &lt;li&gt;Fixed in Horde Form Git &lt;a href=&quot;https://github.com/horde/Form/commit/c916ba979ad1613d76a9407dd0b67968a9594c0e#diff-a09a0502cb30c4dc17838ad8b365f5e9&quot;&gt;repository&lt;/a&gt;: 4th February, 2019&lt;/li&gt;
+  &lt;li&gt;Release Horde Form 2.0.19: 6th February, 2019&lt;/li&gt;
+  &lt;li&gt;Advisory Publication by &lt;a href=&quot;https://ssd-disclosure.com/index.php/archives/3814&quot;&gt;SSD&lt;/a&gt;: 24rd March, 2019&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         <pubDate>Sun, 24 Mar 2019 21:54:52 +0000</pubDate>
